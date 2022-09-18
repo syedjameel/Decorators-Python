@@ -29,17 +29,7 @@ def decorator_2(fn):
         end = '")'                  # Ending string from the source code string
         s = str(inspect.getsource(fn))
         s = (s.split(start))[1].split(end)[0]
-        res = s + '\\'
-        j = 0
-        final_output = []
-        for i in range(len(res)):
-            if res[i] == '\\':
-                final_output.append(str(res[j:i]) + "\n")
-                j = i+2
+        final_output = s.replace('\\n', '\n').replace('\\t', '\t')
         print(f"Output:\t", end="")
-        for i in range(len(final_output)):
-            if i == 0:
-                print(f"{''.join(final_output[i])}", end="")
-            else:
-                print(f"\t\t{''.join(final_output[i])}", end="")
+        print(final_output)
     return wrapper
