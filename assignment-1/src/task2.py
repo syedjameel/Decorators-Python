@@ -25,11 +25,6 @@ def decorator_2(fn):
         print(f"Args:\tpositional {args}\n\t\tkey=worded {kwargs}")
         print(f"Doc:\t{fn.__doc__}")
         print(f"Source:\t{inspect.getsource(fn)}")
-        start = 'print("'           # Starting string from the source code string
-        end = '")'                  # Ending string from the source code string
-        s = str(inspect.getsource(fn))
-        s = (s.split(start))[1].split(end)[0]
-        final_output = s.replace('\\n', '\n').replace('\\t', '\t')
         print(f"Output:\t", end="")
-        print(final_output)
+        print(f"{fn(*args, **kwargs)}\n")
     return wrapper
