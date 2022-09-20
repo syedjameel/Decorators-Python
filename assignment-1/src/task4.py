@@ -9,7 +9,7 @@ import io
 def exit_hd():
     """To print the ranks of each program just before the program is finished"""
     sorted_ranks = sorted(ranks.items(), key=lambda x: x[1])
-    if len(sorted_ranks) >0:
+    if len(sorted_ranks) > 0:
         print("\nPROGRAM\t|\tRANK\t|\tTIME ELAPSED", end="")
         for i in range(len(sorted_ranks)):
             print("\n", sorted_ranks[i][0], "\t\t", i + 1, "\t\t", sorted_ranks[i][1], "sec", end="")
@@ -43,7 +43,11 @@ class decorator_4:
                     print(f"Sign:\t{inspect.signature(self.fn)}")
                     print(f"Args:\tpositional {args}\n\t\tkey=worded {kwargs}")
                     print(f"Doc:\t{self.fn.__doc__}")
-                    print(f"Source:\t{inspect.getsource(self.fn)}")
+                    print(f"Source:\t", end="")
+                    i = 0
+                    for line in inspect.getsourcelines(self.fn)[0]:
+                        print((" " if i == 0 else '\t\t') + line, end="")
+                        i = 1
                     print(f"Output:\t", end="")
                     print(f"{self.fn(*args, **kwargs)}\n")
             fd.close()
@@ -77,8 +81,12 @@ def decorator_4_function(fn):
                     print(f"Type:\t{type(fn)}")
                     print(f"Sign:\t{inspect.signature(fn)}")
                     print(f"Args:\tpositional {args}\n\t\tkey=worded {kwargs}")
-                    print(f"Doc:\t{fn.__doc__}")
-                    print(f"Source:\t{inspect.getsource(fn)}")
+                    print(f"Doc:\t{fn.__doc__}")    # can also use inspect.getdoc(self.fn)
+                    print(f"Source:\t", end="")
+                    i = 0
+                    for line in inspect.getsourcelines(fn)[0]:
+                        print((" " if i == 0 else '\t\t') + line, end="")
+                        i = 1
                     print(f"Output:\t", end="")
                     print(f"{fn(*args, **kwargs)}\n")
             fd.close()

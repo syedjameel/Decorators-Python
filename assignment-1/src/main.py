@@ -13,6 +13,7 @@ from task4 import decorator_4, decorator_4_function
 #@decorator_2
 #@decorator_1
 def func():
+    """This is a random funtionc which does random stuff"""
     print("I am ready to Start")
     result = 0
     n = random.randint(10, 751)
@@ -25,6 +26,7 @@ def func():
 #@decorator_2
 #@decorator_1
 def funx(n=2, m=5):
+    """This is a random funtionx which does random stuff"""
     print("I am ready to do serious stuff")
     max_val = float('-inf')
     n = random.randint(10, 751)

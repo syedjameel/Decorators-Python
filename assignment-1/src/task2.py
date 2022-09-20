@@ -22,9 +22,13 @@ def decorator_2(fn):
         print(f"Name:\t{fn.__name__}")
         print(f"Type:\t{type(fn)}")
         print(f"Sign:\t{inspect.signature(fn)}")
-        print(f"Args:\tpositional {args}\n\t\tkey=worded {kwargs}")
+        print(f"Args:\tpositional {args}\n\t\tkey=worded {kwargs}") # can also use inspect.getdoc(fn)
         print(f"Doc:\t{fn.__doc__}")
-        print(f"Source:\t{inspect.getsource(fn)}")
+        print(f"Source:\t", end="")
+        i=0
+        for line in inspect.getsourcelines(fn)[0]:
+            print((" " if i == 0 else '\t\t') + line, end="")
+            i = 1
         print(f"Output:\t", end="")
         print(f"{fn(*args, **kwargs)}\n")
     return wrapper

@@ -10,11 +10,11 @@ def decorator_1(fn):
     :param fn: It is a function which is decorated by this decorator_1 function"""
     counter = 0
 
-    def wrapper():
+    def wrapper(*args, **kwargs):
         nonlocal counter
         with contextlib.redirect_stdout(io.StringIO()) as var:
             start_time = time.time()
-            fn()
+            fn(*args, **kwargs)
         counter += 1 # Counter
         print(f"{fn.__name__} call {counter} executed in {(time.time() - start_time)} sec")
     return wrapper

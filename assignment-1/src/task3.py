@@ -38,8 +38,12 @@ class decorator_3:
                 print(f"Type:\t{type(self.fn)}")
                 print(f"Sign:\t{inspect.signature(self.fn)}")
                 print(f"Args:\tpositional {args}\n\t\tkey=worded {kwargs}")
-                print(f"Doc:\t{self.fn.__doc__}")
-                print(f"Source:\t{inspect.getsource(self.fn)}")
+                print(f"Doc:\t{self.fn.__doc__}")   # can also use inspect.getdoc(self.fn)
+                print(f"Source:\t", end="")
+                i = 0
+                for line in inspect.getsourcelines(self.fn)[0]:
+                    print((" " if i == 0 else '\t\t') + line, end="")
+                    i = 1
                 print(f"Output:\t", end="")
                 print(f"{self.fn(*args, **kwargs)}\n")
         return ret
