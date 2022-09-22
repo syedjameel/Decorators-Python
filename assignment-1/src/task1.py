@@ -14,8 +14,9 @@ def decorator_1(fn):
         nonlocal counter
         with contextlib.redirect_stdout(io.StringIO()) as var:
             start_time = time.time()
-            fn(*args, **kwargs)
+            output = fn(*args, **kwargs)
         counter += 1 # Counter
         print(f"{fn.__name__} call {counter} executed in {(time.time() - start_time)} sec")
+        return output
     return wrapper
 

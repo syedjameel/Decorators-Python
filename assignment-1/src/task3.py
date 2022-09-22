@@ -45,5 +45,6 @@ class decorator_3:
                     print((" " if i == 0 else '\t\t') + line, end="")
                     i = 1
                 print(f"Output:\t", end="")
-                print(f"{self.fn(*args, **kwargs)}\n")
+                print(f"{ret}\n")
+                return ret
         return ret
