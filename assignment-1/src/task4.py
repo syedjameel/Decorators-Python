@@ -33,7 +33,7 @@ class decorator_4:
             with open('task4_logs.txt', 'a') as fd:
                 with contextlib.redirect_stdout(fd):
                     start_time = time.time()
-                    self.fn(*args, **kwargs)
+                    output = self.fn(*args, **kwargs)
                     total_time = (time.time() - start_time)
                     self.counter += 1
                     print(f"{self.fn.__name__} call {self.counter} executed in {total_time} sec")
@@ -49,8 +49,9 @@ class decorator_4:
                         print((" " if i == 0 else '\t\t') + line, end="")
                         i = 1
                     print(f"Output:\t", end="")
-                    print(f"{self.fn(*args, **kwargs)}\n")
+                    print(f"{output}\n")
             fd.close()
+            return output
         except Exception:
             fd.close()
             error_file.writelines(f"{datetime.datetime.now()}\n{traceback.format_exc()}\n\n")
@@ -72,7 +73,7 @@ def decorator_4_function(fn):
             with open('task4_logs.txt', 'a') as fd:
                 with contextlib.redirect_stdout(fd):
                     start_time = time.time()
-                    fn(*args, **kwargs)
+                    output = fn(*args, **kwargs)
                     total_time = (time.time() - start_time)
                     counter += 1
                     print(f"{fn.__name__} call {counter} executed in {total_time} sec")
@@ -88,8 +89,9 @@ def decorator_4_function(fn):
                         print((" " if i == 0 else '\t\t') + line, end="")
                         i = 1
                     print(f"Output:\t", end="")
-                    print(f"{fn(*args, **kwargs)}\n")
+                    print(f"{output}\n")
             fd.close()
+            return output
         except Exception:
             fd.close()
             error_file.writelines(f"{datetime.datetime.now()}\n{traceback.format_exc()}\n\n")

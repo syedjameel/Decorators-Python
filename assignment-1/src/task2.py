@@ -16,7 +16,7 @@ def decorator_2(fn):
         nonlocal counter
         start_time = time.time()
         with contextlib.redirect_stdout(io.StringIO()) as var:
-            fn(*args, **kwargs)
+            output = fn(*args, **kwargs)
         counter += 1    # Counter for counting the number of times the function was called
         print(f"{fn.__name__} call {counter} executed in {(time.time() - start_time)} sec")
         print(f"Name:\t{fn.__name__}")
@@ -30,5 +30,6 @@ def decorator_2(fn):
             print((" " if i == 0 else '\t\t') + line, end="")
             i = 1
         print(f"Output:\t", end="")
-        print(f"{fn(*args, **kwargs)}\n")
+        print(f"{output}\n")
+        return output
     return wrapper
